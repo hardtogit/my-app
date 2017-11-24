@@ -10,12 +10,10 @@ class TodoList extends React.Component {
     constructor(props) {
         super(props);
     }
-
-
     render(){
         return (
             <div>
-                <button onClick={()=>{browserHistory.goBack()}}>Add Item</button>
+                <button onClick={()=>{browserHistory.goBack()}}>返回</button>
             </div>
         );
     }

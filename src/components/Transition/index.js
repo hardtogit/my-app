@@ -24,8 +24,6 @@ class Index extends React.Component{
                 pathname,
             }
         }=nextProps
-
-        console.log(pathname+","+action)
         if(action=='POP'){
             this.setState({
                 transitionGroup: 'swap-right',

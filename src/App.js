@@ -12,7 +12,6 @@ import { observable, useStrict, action } from 'mobx';
 import { observer } from 'mobx-react';
 import './assets/css/bao.less';
 useStrict(true);
-
 class MyState {
     @observable num = 0;
     @action addNum = () => {
@@ -21,11 +20,11 @@ class MyState {
 }
 
 const newState = new MyState();
-
 @observer
 class App extends Component {
   render() {
     return (
+        <Provider store={newState}>
       <Router history={browserHistory}>
           <Route path="/"  component={Transition}>
               <IndexRedirect to="home" />
@@ -40,6 +39,7 @@ class App extends Component {
           </Route>
           <Redirect from='/*' to='/' />
       </Router>
+        </Provider>
     );
   }
 }

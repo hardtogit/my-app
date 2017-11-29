@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import {createStore,applyMiddleware} from 'redux';
+import createLogger from 'redux-logger';
+import {Provider} from 'react-redux'
+import reducer from './reducer'
 import {Route,Router,browserHistory,IndexRoute,Redirect,IndexRedirect} from 'react-router'
 import Home from './views/home'
 import Find from './views/find'
@@ -8,23 +11,13 @@ import Mine from './views/mine'
 import Transition from './components/Transition/index'
 import IndexTabs from './components/IndexTabs'
 import {Test} from "./loadTool";
-import { observable, useStrict, action } from 'mobx';
-import { observer } from 'mobx-react';
 import './assets/css/bao.less';
-useStrict(true);
-class MyState {
-    @observable num = 0;
-    @action addNum = () => {
-        this.num++;
-    };
-}
-
-const newState = new MyState();
-@observer
+const logger = createLogger();
+const store=createStore(reducer,{num:24},applyMiddleware(logger))
 class App extends Component {
   render() {
     return (
-        <Provider store={newState}>
+        <Provider store={store}>
       <Router history={browserHistory}>
           <Route path="/"  component={Transition}>
               <IndexRedirect to="home" />
